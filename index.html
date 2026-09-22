@@ -1,0 +1,2289 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGAS MULTI INDUSTRI | Customer Portal</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f3f6fa;
+    color:#172033;
+}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:250px;
+    background:#071b35;
+    color:white;
+    padding:25px 18px;
+    z-index:20;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.logo span{
+    color:#25a8ff;
+}
+
+.logo-sub{
+    font-size:11px;
+    color:#a9b7c8;
+    margin-bottom:35px;
+}
+
+.menu-title{
+    font-size:11px;
+    color:#7f91a8;
+    margin:20px 12px 8px;
+    text-transform:uppercase;
+}
+
+.menu-btn{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#c9d5e4;
+    padding:12px 14px;
+    text-align:left;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:4px;
+    font-size:14px;
+}
+
+.menu-btn:hover,
+.menu-btn.active{
+    background:#12365f;
+    color:white;
+}
+
+.user-box{
+    position:absolute;
+    bottom:20px;
+    left:18px;
+    right:18px;
+    background:#102b4c;
+    padding:13px;
+    border-radius:10px;
+}
+
+.user-name{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.user-role{
+    font-size:11px;
+    color:#9fb1c6;
+    margin-top:4px;
+}
+
+/* MAIN */
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+.topbar{
+    background:white;
+    padding:18px 30px;
+    border-bottom:1px solid #e2e8f0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.page-title{
+    font-size:22px;
+    font-weight:700;
+}
+
+.company-name{
+    font-size:13px;
+    color:#607086;
+}
+
+.content{
+    padding:30px;
+}
+
+/* PAGE */
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* CARDS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.stat-label{
+    color:#718096;
+    font-size:13px;
+}
+
+.stat-value{
+    font-size:26px;
+    font-weight:700;
+    margin-top:8px;
+}
+
+/* PRODUCT */
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.product-card{
+    background:white;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+    border:1px solid #e5eaf0;
+}
+
+.product-icon{
+    height:120px;
+    background:#eef6ff;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:55px;
+    margin-bottom:18px;
+}
+
+.product-name{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.badge{
+    display:inline-block;
+    background:#e7f4ff;
+    color:#0874c9;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    margin-bottom:12px;
+}
+
+.product-info{
+    font-size:13px;
+    color:#657386;
+    line-height:1.8;
+}
+
+.product-price{
+    font-size:24px;
+    font-weight:700;
+    margin:14px 0;
+}
+
+.product-condition{
+    font-size:11px;
+    color:#7b8796;
+    margin-bottom:15px;
+}
+
+.product-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* BUTTON */
+.btn{
+    border:0;
+    padding:10px 14px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:12px;
+}
+
+.btn-primary{
+    background:#087ed1;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#066bb2;
+}
+
+.btn-secondary{
+    background:#eaf0f6;
+    color:#25364d;
+}
+
+.btn-success{
+    background:#16a06b;
+    color:white;
+}
+
+.btn-danger{
+    background:#d93c3c;
+    color:white;
+}
+
+.btn-warning{
+    background:#f1a51c;
+    color:white;
+}
+
+/* SEARCH */
+.search-box{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.search-box input{
+    flex:1;
+    padding:12px;
+    border:1px solid #d9e1ea;
+    border-radius:8px;
+    outline:none;
+}
+
+/* TABLE */
+.table-wrapper{
+    background:white;
+    border-radius:12px;
+    overflow:auto;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:14px;
+    border-bottom:1px solid #edf0f4;
+    text-align:left;
+    font-size:13px;
+}
+
+th{
+    background:#f8fafc;
+    color:#536277;
+}
+
+/* FORM */
+.form-card{
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    border:1px solid #d7e0e9;
+    padding:11px;
+    border-radius:7px;
+    outline:none;
+}
+
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+/* CART */
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:16px 0;
+    border-bottom:1px solid #edf0f4;
+}
+
+.cart-name{
+    font-weight:700;
+}
+
+.qty-control{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.qty-control button{
+    border:1px solid #d6dee8;
+    background:white;
+    width:28px;
+    height:28px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.cart-total{
+    text-align:right;
+    font-size:20px;
+    font-weight:700;
+    margin-top:20px;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:100;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:min(900px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:12px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:14px;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.pdf-viewer{
+    width:100%;
+    height:70vh;
+    border:1px solid #dce4ed;
+    border-radius:8px;
+    margin-top:15px;
+}
+
+/* EMPTY */
+.empty{
+    padding:40px;
+    text-align:center;
+    color:#7b8796;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .sidebar{
+        width:210px;
+    }
+
+    .main{
+        margin-left:210px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:650px){
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .user-box{
+        position:static;
+        margin-top:15px;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .content{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="logo">
+        IGAS <span>SUPPLY</span>
+    </div>
+
+    <div class="logo-sub">
+        Customer Portal
+    </div>
+
+    <div class="menu-title">MENU</div>
+
+    <button class="menu-btn active" onclick="showPage('dashboard',this)">
+        🏠 Dashboard
+    </button>
+
+    <button class="menu-btn" onclick="showPage('products',this)">
+        📦 Product Catalog
+    </button>
+
+    <button class="menu-btn" onclick="showPage('rfq',this)">
+        📝 RFQ / Quotation
+    </button>
+
+    <button class="menu-btn" onclick="showPage('checkout',this)">
+        🛒 Cart & Purchase
+    </button>
+
+    <button class="menu-btn" onclick="showPage('orders',this)">
+        📋 Order History
+    </button>
+
+    <button class="menu-btn" onclick="showPage('po',this)">
+        📄 PO History
+    </button>
+
+    <div class="menu-title">ACCOUNT</div>
+
+    <button class="menu-btn" onclick="alert('Fitur profil dapat dikembangkan pada tahap berikutnya.')">
+        👤 My Account
+    </button>
+
+    <div class="user-box">
+        <div class="user-name">Customer Account</div>
+        <div class="user-role">IGAS SUPPLY Customer</div>
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <div class="topbar">    python --version
+    python -m http.server 8000
+        <div>
+            <div class="page-title" id="pageTitle">
+                Dashboard
+            </div>
+            <div class="company-name">
+                PT Igas Multi Industri
+            </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="showPage('checkout')">
+            🛒 Cart (<span id="cartCount">0</span>)
+        </button>
+    </div>
+
+
+    <div class="content">
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page active">
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-label">
+                        Total Products
+                    </div>
+                    <div class="stat-value" id="statProducts">
+                        2
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">
+                        Cart Items
+                    </div>
+                    <div class="stat-value" id="statCart">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">
+                        RFQ
+                    </div>
+                    <div class="stat-value" id="statRFQ">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">
+                        Orders
+                    </div>
+                    <div class="stat-value" id="statOrders">
+                        0
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="form-card">
+
+                <h2 style="margin-bottom:8px;">
+                    Welcome to IGAS SUPPLY
+                </h2>
+
+                <p style="color:#68768a;font-size:14px;line-height:1.7;">
+                    Customer portal untuk melihat produk, dokumen konstruksi,
+                    mengajukan RFQ, melakukan pembelian, mengunggah PO,
+                    dan melihat riwayat transaksi.
+                </p>
+
+                <br>
+
+                <button class="btn btn-primary"
+                        onclick="showPage('products')">
+                    Lihat Product Catalog
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCTS -->
+        <section id="products" class="page">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchProduct"
+                    placeholder="Cari produk..."
+                    oninput="searchProducts()"
+                >
+
+            </div>
+
+            <div class="product-grid" id="productGrid"></div>
+
+        </section>
+
+
+        <!-- RFQ -->
+        <section id="rfq" class="page">
+
+            <div class="form-card">
+
+                <h2 style="margin-bottom:20px;">
+                    Request for Quotation
+                </h2>
+
+                <form id="rfqForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Nama Perusahaan</label>
+                            <input
+                                type="text"
+                                id="rfqCompany"
+                                required
+                                placeholder="Nama perusahaan"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nama PIC</label>
+                            <input
+                                type="text"
+                                id="rfqPIC"
+                                required
+                                placeholder="Nama PIC"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                id="rfqEmail"
+                                required
+                                placeholder="email@company.com"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>No. Telepon</label>
+                            <input
+                                type="text"
+                                id="rfqPhone"
+                                placeholder="08xxxxxxxxxx"
+                            >
+                        </div>
+
+                        <div class="form-group full">
+
+                            <label>
+                                Produk
+                            </label>
+
+                            <select id="rfqProduct" required>
+
+                                <option value="">
+                                    -- Pilih Produk --
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Quantity
+                            </label>
+
+                            <input
+                                type="number"
+                                id="rfqQty"
+                                min="1"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Target Delivery
+                            </label>
+
+                            <input
+                                type="date"
+                                id="rfqDelivery"
+                            >
+
+                        </div>
+
+                        <div class="form-group full">
+
+                            <label>
+                                Keterangan / Spesifikasi
+                            </label>
+
+                            <textarea
+                                id="rfqNotes"
+                                placeholder="Tuliskan kebutuhan atau spesifikasi tambahan..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">
+                        Kirim RFQ
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHECKOUT -->
+        <section id="checkout" class="page">
+
+            <div class="form-card">
+
+                <h2>
+                    Cart & Purchase
+                </h2>
+
+                <div id="cartContainer"></div>
+
+                <hr style="margin:25px 0;border:0;border-top:1px solid #e8edf2;">
+
+                <h3 style="margin-bottom:15px;">
+                    Customer Information
+                </h3>
+
+                <form id="checkoutForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input id="orderCompany" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>PIC</label>
+                            <input id="orderPIC" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="orderEmail" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input id="orderPhone">
+                        </div>
+
+                        <div class="form-group full">
+
+                            <label>
+                                Purchase Order (PO)
+                            </label>
+
+                            <input
+                                type="file"
+                                id="poFile"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                            >
+
+                            <small style="display:block;margin-top:7px;color:#7b8796;">
+                                PDF/JPG/PNG. Pada prototype ini file dicatat secara lokal.
+                            </small>
+
+                        </div>
+
+                        <div class="form-group full">
+
+                            <label>
+                                Delivery Address
+                            </label>
+
+                            <textarea
+                                id="orderAddress"
+                                required
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-success" type="submit">
+                        Submit Purchase
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- ORDERS -->
+        <section id="orders" class="page">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Company</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="orderTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- PO -->
+        <section id="po" class="page">
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Company</th>
+                            <th>PO File</th>
+                            <th>Date</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="poTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal" id="productModal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeModal()">
+            ×
+        </span>
+
+        <div id="productDetail"></div>
+
+    </div>
+
+</div>
+
+
+<!-- PDF VIEWER MODAL -->
+<div class="modal" id="pdfModal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closePDF()">
+            ×
+        </span>
+
+        <h2 id="pdfTitle">
+            Product Document
+        </h2>
+
+        <p style="color:#718096;font-size:13px;margin-top:5px;">
+            Preview dokumen sebelum download.
+        </p>
+
+        <iframe
+            id="pdfViewer"
+            class="pdf-viewer"
+        ></iframe>
+
+        <div style="margin-top:15px;display:flex;gap:10px;">
+
+            <button
+                class="btn btn-primary"
+                onclick="downloadCurrentPDF()">
+                ⬇ Download PDF
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="closePDF()">
+                Tutup
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   PRODUCT DATA
+============================================================ */
+
+const products = [
+
+    {
+        id:1,
+
+        name:"Storage Tank Doer 10 m³",
+
+        category:"Storage Tank",
+
+        icon:"🏭",
+
+        size:"10 m³",
+
+        application:"Liquid O₂, N₂, Ar",
+
+        price:27000,
+
+        currency:"USD",
+
+        condition:"Gross Price",
+
+        type:"Storage Tank Doer",
+
+        description:
+        "Storage Tank dengan kapasitas 10 m³ untuk kebutuhan penyimpanan Liquid Oxygen, Liquid Nitrogen, dan Liquid Argon.",
+
+           pdf:"file:///D:/Kerjaan/produk%20isotank/Produk_1.pdf"
+    },
+
+
+    {
+        id:2,
+
+        name:"Microbulk 10 m³",
+
+        category:"Microbulk",
+
+        icon:"🏭",
+
+        size:"10 m³",
+
+        application:"Liquid O₂, N₂, Ar",
+
+        price:25000,
+
+        currency:"USD",
+
+        condition:"Gross Price",
+
+        type:"Microbulk",
+
+        description:
+        "Microbulk dengan kapasitas 10 m³ untuk kebutuhan penyimpanan dan suplai Liquid Oxygen, Liquid Nitrogen, dan Liquid Argon.",
+
+           pdf:"file:///D:/Kerjaan/produk%20isotank/Produk_2.pdf"
+    }
+
+];
+
+
+/* ============================================================
+   LOCAL STORAGE
+============================================================ */
+
+let cart =
+JSON.parse(localStorage.getItem("igas_cart")) || [];
+
+let rfqs =
+JSON.parse(localStorage.getItem("igas_rfqs")) || [];
+
+let orders =
+JSON.parse(localStorage.getItem("igas_orders")) || [];
+
+
+/* ============================================================
+   HELPER
+============================================================ */
+
+function saveData(){
+
+    localStorage.setItem(
+        "igas_cart",
+        JSON.stringify(cart)
+    );
+
+    localStorage.setItem(
+        "igas_rfqs",
+        JSON.stringify(rfqs)
+    );
+
+    localStorage.setItem(
+        "igas_orders",
+        JSON.stringify(orders)
+    );
+}
+
+
+function formatUSD(number){
+
+    return new Intl.NumberFormat(
+        "en-US",
+        {
+            style:"currency",
+            currency:"USD",
+            maximumFractionDigits:0
+        }
+    ).format(number);
+
+}
+
+
+/* ============================================================
+   PAGE NAVIGATION
+============================================================ */
+
+function showPage(page,button){
+
+    document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+    document.getElementById(page)
+        .classList.add("active");
+
+    document.querySelectorAll(".menu-btn")
+        .forEach(b => b.classList.remove("active"));
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    const titles = {
+
+        dashboard:"Dashboard",
+
+        products:"Product Catalog",
+
+        rfq:"Request for Quotation",
+
+        checkout:"Cart & Purchase",
+
+        orders:"Order History",
+
+        po:"PO History"
+
+    };
+
+    document.getElementById("pageTitle")
+        .innerText = titles[page] || "Dashboard";
+
+    renderAll();
+
+}
+
+
+/* ============================================================
+   PRODUCT CARD
+============================================================ */
+
+function productCard(product){
+
+    return `
+
+        <div class="product-card">
+
+            <div class="product-icon">
+                ${product.icon}
+            </div>
+
+            <div class="badge">
+                ${product.category}
+            </div>
+
+            <div class="product-name">
+                ${product.name}
+            </div>
+
+            <div class="product-info">
+
+                <strong>Type:</strong>
+                ${product.type}
+
+                <br>
+
+                <strong>Size:</strong>
+                ${product.size}
+
+                <br>
+
+                <strong>Application:</strong>
+                ${product.application}
+
+            </div>
+
+            <div class="product-price">
+                ${formatUSD(product.price)}
+            </div>
+
+            <div class="product-condition">
+                ${product.condition}
+            </div>
+
+            <div class="product-actions">
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="openProduct(${product.id})">
+                    Detail Produk
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="viewProductPDF(${product.id})">
+                    👁 Lihat PDF
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="downloadProductPDF(${product.id})">
+                    ⬇ Download PDF
+                </button>
+
+                <button
+                    class="btn btn-success"
+                    onclick="addToCart(${product.id})">
+                    + Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ============================================================
+   RENDER PRODUCTS
+============================================================ */
+
+function renderProducts(list=products){
+
+    const grid =
+    document.getElementById("productGrid");
+
+    grid.innerHTML =
+    list.map(productCard).join("");
+
+}
+
+
+/* ============================================================
+   SEARCH
+============================================================ */
+
+function searchProducts(){
+
+    const keyword =
+    document.getElementById("searchProduct")
+    .value
+    .toLowerCase();
+
+    const filtered =
+    products.filter(p =>
+
+        p.name.toLowerCase().includes(keyword) ||
+
+        p.category.toLowerCase().includes(keyword) ||
+
+        p.application.toLowerCase().includes(keyword)
+
+    );
+
+    renderProducts(filtered);
+
+}
+
+
+/* ============================================================
+   ADD CART
+============================================================ */
+
+function addToCart(id){
+
+    const existing =
+    cart.find(item => item.id === id);
+
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+            id:id,
+            qty:1
+        });
+
+    }
+
+    saveData();
+
+    renderAll();
+
+    alert("Produk berhasil ditambahkan ke cart.");
+
+}
+
+
+/* ============================================================
+   REMOVE CART
+============================================================ */
+
+function removeCart(id){
+
+    cart =
+    cart.filter(item => item.id !== id);
+
+    saveData();
+
+    renderAll();
+
+}
+
+
+/* ============================================================
+   CHANGE QUANTITY
+============================================================ */
+
+function changeQty(id,value){
+
+    const item =
+    cart.find(i => i.id === id);
+
+    if(!item) return;
+
+    item.qty += value;
+
+    if(item.qty <= 0){
+
+        removeCart(id);
+
+        return;
+    }
+
+    saveData();
+
+    renderAll();
+
+}
+
+
+/* ============================================================
+   CART TOTAL
+============================================================ */
+
+function getCartTotal(){
+
+    return cart.reduce(
+
+        (total,item)=>{
+
+            const product =
+            products.find(p => p.id === item.id);
+
+            return total +
+            (product.price * item.qty);
+
+        },
+
+        0
+
+    );
+
+}
+
+
+/* ============================================================
+   RENDER CART
+============================================================ */
+
+function renderCart(){
+
+    const container =
+    document.getElementById("cartContainer");
+
+    if(!container) return;
+
+    if(cart.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty">
+                🛒 Cart masih kosong.
+                <br><br>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="showPage('products')">
+                    Lihat Produk
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let html = "";
+
+    cart.forEach(item => {
+
+        const product =
+        products.find(p => p.id === item.id);
+
+        const subtotal =
+        product.price * item.qty;
+
+
+        html += `
+
+            <div class="cart-item">
+
+                <div>
+
+                    <div class="cart-name">
+                        ${product.name}
+                    </div>
+
+                    <div style="font-size:12px;color:#718096;">
+                        ${formatUSD(product.price)} / unit
+                    </div>
+
+                </div>
+
+
+                <div class="qty-control">
+
+                    <button
+                        onclick="changeQty(${product.id},-1)">
+                        -
+                    </button>
+
+                    <strong>
+                        ${item.qty}
+                    </strong>
+
+                    <button
+                        onclick="changeQty(${product.id},1)">
+                        +
+                    </button>
+
+                </div>
+
+
+                <div>
+                    <strong>
+                        ${formatUSD(subtotal)}
+                    </strong>
+                </div>
+
+
+                <button
+                    class="btn btn-danger"
+                    onclick="removeCart(${product.id})">
+                    Hapus
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        <div class="cart-total">
+
+            Total:
+            ${formatUSD(getCartTotal())}
+
+        </div>
+
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* ============================================================
+   PRODUCT DETAIL
+============================================================ */
+
+function openProduct(id){
+
+    const product =
+    products.find(p => p.id === id);
+
+    const modal =
+    document.getElementById("productModal");
+
+    document.getElementById("productDetail")
+    .innerHTML = `
+
+        <h2>
+            ${product.name}
+        </h2>
+
+        <p style="color:#718096;margin-top:8px;">
+            ${product.description}
+        </p>
+
+        <br>
+
+        <table>
+
+            <tr>
+                <td><strong>Type</strong></td>
+                <td>${product.type}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Size</strong></td>
+                <td>${product.size}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Application</strong></td>
+                <td>${product.application}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Price</strong></td>
+                <td>${formatUSD(product.price)}</td>
+            </tr>
+
+            <tr>
+                <td><strong>Condition</strong></td>
+                <td>${product.condition}</td>
+            </tr>
+
+        </table>
+
+        <br>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+
+            <button
+                class="btn btn-primary"
+                onclick="viewProductPDF(${product.id})">
+                👁 Lihat Dokumen Konstruksi
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="downloadProductPDF(${product.id})">
+                ⬇ Download PDF
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="addToCart(${product.id});closeModal();">
+                + Add to Cart
+            </button>
+
+        </div>
+
+    `;
+
+    modal.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+    .getElementById("productModal")
+    .classList.remove("show");
+
+}
+
+
+/* ============================================================
+   PDF VIEW
+============================================================ */
+
+let currentPDFUrl = null;
+
+
+function viewProductPDF(id){
+
+    const product =
+    products.find(p => p.id === id);
+
+    if(!product) return;
+
+
+    /*
+    JIKA PDF ASLI SUDAH ADA:
+    product.pdf akan berisi lokasi file PDF.
+    */
+
+    if(product.pdf){
+
+        document.getElementById("pdfTitle")
+        .innerText =
+        product.name + " - Construction Document";
+
+        document.getElementById("pdfViewer")
+        .src = product.pdf;
+
+        document.getElementById("pdfModal")
+        .classList.add("show");
+
+        currentPDFUrl = product.pdf;
+
+        return;
+    }
+
+
+    /*
+    SEMENTARA:
+    Buat PDF spesifikasi contoh.
+    */
+
+    const blob =
+    createSimplePDF(product);
+
+    currentPDFUrl =
+    URL.createObjectURL(blob);
+
+    document.getElementById("pdfTitle")
+    .innerText =
+    product.name + " - Product Specification";
+
+    document.getElementById("pdfViewer")
+    .src = currentPDFUrl;
+
+    document.getElementById("pdfModal")
+    .classList.add("show");
+
+}
+
+
+function closePDF(){
+
+    document
+    .getElementById("pdfModal")
+    .classList.remove("show");
+
+    document.getElementById("pdfViewer")
+    .src = "";
+
+}
+
+
+function downloadProductPDF(id){
+
+    const product =
+    products.find(p => p.id === id);
+
+    if(!product) return;
+
+
+    /*
+    Jika PDF asli sudah tersedia
+    */
+
+    if(product.pdf){
+
+        const link =
+        document.createElement("a");
+
+        link.href =
+        product.pdf;
+
+        link.download =
+        product.name
+        .replace(/\s+/g,"-")
+        + ".pdf";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+        return;
+    }
+
+
+    /*
+    PDF sementara
+    */
+
+    const blob =
+    createSimplePDF(product);
+
+    const url =
+    URL.createObjectURL(blob);
+
+    const link =
+    document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+    product.name
+    .replace(/\s+/g,"-")
+    + ".pdf";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    setTimeout(
+        () => URL.revokeObjectURL(url),
+        1000
+    );
+
+}
+
+
+/* ============================================================
+   SIMPLE PDF GENERATOR
+============================================================ */
+
+function createSimplePDF(product){
+
+    const text = `
+
+IGAS SUPPLY
+PRODUCT SPECIFICATION
+
+Product:
+${product.name}
+
+Type:
+${product.type}
+
+Size:
+${product.size}
+
+Application:
+${product.application}
+
+Price:
+${formatUSD(product.price)}
+
+Condition:
+${product.condition}
+
+Description:
+${product.description}
+
+This document is a prototype specification generated
+for IGAS SUPPLY customer portal.
+
+`;
+
+    /*
+    Membuat PDF minimal menggunakan
+    struktur PDF sederhana.
+    */
+
+    const escapePDF =
+    text.replace(
+        /\\/g,"\\\\"
+    )
+    .replace(
+        /\(/g,"\\("
+    )
+    .replace(
+        /\)/g,"\\)"
+    );
+
+    const lines =
+    escapePDF.split("\n");
+
+    let stream =
+    "BT\n/F1 11 Tf\n50 750 Td\n";
+
+    lines.forEach(line => {
+
+        stream +=
+        `(${line}) Tj\n0 -16 Td\n`;
+
+    });
+
+    stream +=
+    "ET";
+
+    const objects = [];
+
+    objects.push(
+        "<< /Type /Catalog /Pages 2 0 R >>"
+    );
+
+    objects.push(
+        "<< /Type /Pages /Kids [3 0 R] /Count 1 >>"
+    );
+
+    objects.push(
+        "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>"
+    );
+
+    objects.push(
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"
+    );
+
+    objects.push(
+        `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`
+    );
+
+
+    let pdf =
+    "%PDF-1.4\n";
+
+    const offsets = [0];
+
+    objects.forEach(
+        (obj,index)=>{
+
+            offsets[index+1] =
+            pdf.length;
+
+            pdf +=
+            `${index+1} 0 obj\n${obj}\nendobj\n`;
+
+        }
+    );
+
+
+    const xref =
+    pdf.length;
+
+    pdf +=
+    `xref\n0 ${objects.length+1}\n`;
+
+    pdf +=
+    "0000000000 65535 f \n";
+
+
+    for(let i=1;i<offsets.length;i++){
+
+        pdf +=
+        String(offsets[i])
+        .padStart(10,"0")
+        + " 00000 n \n";
+
+    }
+
+
+    pdf +=
+    `trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\n`;
+
+    pdf +=
+    `startxref\n${xref}\n%%EOF`;
+
+
+    return new Blob(
+        [pdf],
+        {type:"application/pdf"}
+    );
+
+}
+
+
+/* ============================================================
+   RFQ PRODUCT SELECT
+============================================================ */
+
+function loadRFQProducts(){
+
+    const select =
+    document.getElementById("rfqProduct");
+
+    if(!select) return;
+
+    select.innerHTML =
+    `
+    <option value="">
+        -- Pilih Produk --
+    </option>
+    `;
+
+    products.forEach(product => {
+
+        select.innerHTML += `
+
+            <option value="${product.id}">
+                ${product.name} -
+                ${formatUSD(product.price)}
+            </option>
+
+        `;
+
+    });
+
+}
+
+
+/* ============================================================
+   RFQ FORM
+============================================================ */
+
+document
+.getElementById("rfqForm")
+.addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+        const productId =
+        Number(
+            document.getElementById("rfqProduct").value
+        );
+
+        const product =
+        products.find(p => p.id === productId);
+
+
+        const rfq = {
+
+            id:
+            "RFQ-" +
+            Date.now(),
+
+            date:
+            new Date().toLocaleDateString("id-ID"),
+
+            company:
+            document.getElementById("rfqCompany").value,
+
+            pic:
+            document.getElementById("rfqPIC").value,
+
+            email:
+            document.getElementById("rfqEmail").value,
+
+            phone:
+            document.getElementById("rfqPhone").value,
+
+            product:
+            product.name,
+
+            qty:
+            document.getElementById("rfqQty").value,
+
+            delivery:
+            document.getElementById("rfqDelivery").value,
+
+            notes:
+            document.getElementById("rfqNotes").value,
+
+            status:
+            "Submitted"
+
+        };
+
+
+        rfqs.push(rfq);
+
+        saveData();
+
+        alert(
+            "RFQ berhasil dikirim dengan nomor " +
+            rfq.id
+        );
+
+        this.reset();
+
+        renderAll();
+
+    }
+);
+
+
+/* ============================================================
+   CHECKOUT
+============================================================ */
+
+document
+.getElementById("checkoutForm")
+.addEventListener(
+    "submit",
+    function(e){
+
+        e.preventDefault();
+
+
+        if(cart.length === 0){
+
+            alert(
+                "Cart masih kosong."
+            );
+
+            return;
+
+        }
+
+
+        const poInput =
+        document.getElementById("poFile");
+
+        const poFile =
+        poInput.files[0];
+
+
+        const order = {
+
+            id:
+            "ORD-" +
+            Date.now(),
+
+            date:
+            new Date().toLocaleDateString("id-ID"),
+
+            company:
+            document.getElementById("orderCompany").value,
+
+            pic:
+            document.getElementById("orderPIC").value,
+
+            email:
+            document.getElementById("orderEmail").value,
+
+            phone:
+            document.getElementById("orderPhone").value,
+
+            address:
+            document.getElementById("orderAddress").value,
+
+            items:
+            JSON.parse(JSON.stringify(cart)),
+
+            total:
+            getCartTotal(),
+
+            poFile:
+            poFile ? poFile.name : "-",
+
+            status:
+            "Submitted"
+
+        };
+
+
+        orders.push(order);
+
+        cart = [];
+
+        saveData();
+
+        alert(
+            "Purchase berhasil dikirim.\n\n" +
+            "Order ID: " +
+            order.id
+        );
+
+        this.reset();
+
+        renderAll();
+
+        showPage("orders");
+
+    }
+);
+
+
+/* ============================================================
+   ORDER HISTORY
+============================================================ */
+
+function renderOrders(){
+
+    const tbody =
+    document.getElementById("orderTable");
+
+    if(!tbody) return;
+
+
+    if(orders.length === 0){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="5">
+
+                    <div class="empty">
+                        Belum ada order.
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+    orders.map(order => `
+
+        <tr>
+
+            <td>
+                <strong>
+                    ${order.id}
+                </strong>
+            </td>
+
+            <td>
+                ${order.date}
+            </td>
+
+            <td>
+                ${order.company}
+            </td>
+
+            <td>
+                ${formatUSD(order.total)}
+            </td>
+
+            <td>
+                <span class="badge">
+                    ${order.status}
+                </span>
+            </td>
+
+        </tr>
+
+    `).join("");
+
+}
+
+
+/* ============================================================
+   PO HISTORY
+============================================================ */
+
+function renderPO(){
+
+    const tbody =
+    document.getElementById("poTable");
+
+    if(!tbody) return;
+
+
+    if(orders.length === 0){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="4">
+
+                    <div class="empty">
+                        Belum ada PO.
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+    orders.map(order => `
+
+        <tr>
+
+            <td>
+                ${order.id}
+            </td>
+
+            <td>
+                ${order.company}
+            </td>
+
+            <td>
+                ${order.poFile}
+            </td>
+
+            <td>
+                ${order.date}
+            </td>
+
+        </tr>
+
+    `).join("");
+
+}
+
+
+/* ============================================================
+   STATISTICS
+============================================================ */
+
+function updateStats(){
+
+    document.getElementById("statProducts")
+    .innerText =
+    products.length;
+
+    document.getElementById("statCart")
+    .innerText =
+    cart.reduce(
+        (sum,item)=>sum + item.qty,
+        0
+    );
+
+    document.getElementById("statRFQ")
+    .innerText =
+    rfqs.length;
+
+    document.getElementById("statOrders")
+    .innerText =
+    orders.length;
+
+    document.getElementById("cartCount")
+    .innerText =
+    cart.reduce(
+        (sum,item)=>sum + item.qty,
+        0
+    );
+
+}
+
+
+/* ============================================================
+   RENDER ALL
+============================================================ */
+
+function renderAll(){
+
+    renderProducts();
+
+    renderCart();
+
+    renderOrders();
+
+    renderPO();
+
+    updateStats();
+
+    loadRFQProducts();
+
+}
+
+
+/* ============================================================
+   CLICK OUTSIDE MODAL
+============================================================ */
+
+window.addEventListener(
+    "click",
+    function(e){
+
+        const productModal =
+        document.getElementById("productModal");
+
+        const pdfModal =
+        document.getElementById("pdfModal");
+
+        if(e.target === productModal){
+
+            closeModal();
+
+        }
+
+        if(e.target === pdfModal){
+
+            closePDF();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   INITIALIZATION
+============================================================ */
+
+renderAll();
+
+</script>
+
+</body>
+</html>
+```
